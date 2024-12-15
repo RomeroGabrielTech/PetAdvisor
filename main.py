@@ -55,14 +55,15 @@ def ask():
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": get_system_prompt(detected_lang)},
+            {"role": "system", "content": get_system_prompt(detected_lang) + " Proporciona respuestas completas y bien estructuradas, asegurándote de concluir adecuadamente cada idea."},
             {"role": "user", "content": question}
         ],
-        max_tokens=300,  # Reducido para optimizar costos
-        temperature=0.5,  # Reducido para respuestas más consistentes
-        presence_penalty=0.1,  # Ligera penalización para evitar repeticiones
-        frequency_penalty=0.1,  # Ligera penalización para variedad léxica
-        top_p=0.9  # Núcleo de muestreo para mantener respuestas relevantes
+        max_tokens=500,  # Aumentado para respuestas más completas
+        temperature=0.7,  # Aumentado para más creatividad
+        presence_penalty=0.2,  # Mayor penalización para evitar repeticiones
+        frequency_penalty=0.2,  # Mayor penalización para variedad léxica
+        top_p=0.95,  # Aumentado para mayor variedad manteniendo coherencia
+        stop=["Fin.", "---", "Conclusión:"]  # Marcadores de finalización
     )
 
     # Extraer la respuesta generada por OpenAI
