@@ -1,0 +1,88 @@
+/* Estilo general oscuro */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Fondo oscuro */
+    color: #E0E0E0; /* Texto claro */
+    margin: 0;
+    padding: 0;
+}
+
+/* Centrar contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 50px auto; /* Centrado horizontal */
+    background-color: #1E1E1E; /* Fondo oscuro del contenedor */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: left;
+}
+
+/* Título */
+h1 {
+    color: #BB86FC; /* Morado brillante */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Texto */
+p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Formulario y campo de texto */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    border: 1px solid #BB86FC;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #BB86FC;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: fit-content;
+    align-self: flex-end;
+}
+
+button:hover {
+    background-color: #9A6EE2;
+}
+
+/* Botón de Volver alineado a la derecha en la siguiente línea */
+a.volver {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #BB86FC;
+    color: #121212;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    text-align: right;
+    float: right; /* Alineado a la derecha */
+    margin-top: 30px; /* Separación de la respuesta */
+}
+
+a.volver:hover {
+    background-color: #9A6EE2;
+}
+
