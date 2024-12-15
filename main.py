@@ -14,7 +14,17 @@ def home():
 #-------------------------------
 @app.route('/ask', methods=['POST'])
 def ask():
-    question = request.form['question']
+    question = request.form['question'].strip()
+    
+    if not question:
+        return render_template('response.html', 
+                             question="", 
+                             answer="Por favor, ingresa una pregunta válida.")
+    
+    if len(question) > 500:
+        return render_template('response.html',
+                             question=question,
+                             answer="Por favor, ingresa una pregunta más corta (máximo 500 caracteres).")
 
     # Llamada a OpenAI GPT usando ChatCompletion
     response = openai.ChatCompletion.create(
