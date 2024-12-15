@@ -99,11 +99,14 @@ def ask():
             body = f"Se ha alcanzado el límite de tokens ({MAX_TOKENS}).\nUso total: {total_tokens}\nConsultas totales: {usage_count}"
             msg.attach(MIMEText(body, 'plain'))
             
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            server.login(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
-            server.send_message(msg)
-            server.quit()
+            email_user = os.getenv('EMAIL_USER')
+            email_password = os.getenv('EMAIL_PASSWORD')
+            
+            if email_user and email_password:
+                with smtplib.SMTP('smtp.gmail.com', 587) as server:
+                    server.starttls()
+                    server.login(email_user, email_password)
+                    server.send_message(msg)
             return render_template('response.html', 
                                 question=question,
                                 answer="Lo siento, se ha alcanzado el límite de uso. Contacta al administrador.")
@@ -121,11 +124,14 @@ def ask():
             body = f"Reporte de uso:\nConsultas totales: {usage_count}\nTokens totales: {total_tokens}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
             msg.attach(MIMEText(body, 'plain'))
             
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            server.login(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
-            server.send_message(msg)
-            server.quit()
+            email_user = os.getenv('EMAIL_USER')
+            email_password = os.getenv('EMAIL_PASSWORD')
+            
+            if email_user and email_password:
+                with smtplib.SMTP('smtp.gmail.com', 587) as server:
+                    server.starttls()
+                    server.login(email_user, email_password)
+                    server.send_message(msg)
         except Exception as e:
             print(f"Error enviando reporte: {e}")
 
