@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente de Mascotas</title>
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Asistente de Mascotas</h1>
+    <p>Haz tu pregunta sobre el cuidado de tus mascotas:</p>
+    <form action="/ask" method="post">
+        <input type="text" name="question" placeholder="Escribe tu pregunta aquí..." required>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

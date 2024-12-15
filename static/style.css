@@ -60,7 +60,8 @@ button {
     cursor: pointer;
     transition: background 0.3s ease;
     width: fit-content;
-    align-self: flex-end;
+    margin-left: auto;
+    display: block;
 }
 
 button:hover {
