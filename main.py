@@ -66,7 +66,7 @@ def ask():
     )
 
     # Extraer la respuesta generada por OpenAI
-    answer = response.choices[0].message.content.strip()
+    answer = response.choices[0].message.content.strip().replace('\n', '<br>').replace('• ', '<br>• ')
     
     # Actualizar contadores
     global usage_count, total_tokens

@@ -96,3 +96,30 @@ a.volver:hover {
     margin: 10px 0;
 }
 
+.response {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.response ul, .response ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.response table {
+    border-collapse: collapse;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.response th, .response td {
+    border: 1px solid #BB86FC;
+    padding: 8px;
+    text-align: left;
+}
+
+.response th {
+    background-color: #1E1E1E;
+}
+
