@@ -3,7 +3,7 @@ name = "PetAdvisor"
 version = "0.1.0"
 description = ""
 authors = ["Gabriel Romero <ing.gabriel.romero@gmail.com>"]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = []
 
 [tool.poetry.dependencies]
