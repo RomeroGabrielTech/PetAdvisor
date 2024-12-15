@@ -88,3 +88,11 @@ a.volver:hover {
     background-color: #9A6EE2;
 }
 
+.alert {
+    background-color: #FF4B4B;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
