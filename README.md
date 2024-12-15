@@ -1,56 +1,77 @@
 
-# Asistente de Mascotas 🐾
+# Asistente de Mascotas 🐾 | Pet Care Assistant 🐾
+
+[Español](#español) | [English](#english)
+
+# Español
 
 Un asistente virtual especializado en el cuidado de mascotas, con enfoque particular en el cuidado de pollos y otras mascotas comunes. Desarrollado con Flask y la API de OpenAI.
 
 ## Características
-
 - Interfaz web intuitiva y responsive
 - Respuestas generadas por IA usando GPT-3.5
 - Diseño moderno con tema oscuro
-- Registro de conversaciones
-- Validación de entrada de usuario
 - Soporte multilingüe (Español, Inglés, Francés y Portugués)
-- Detección automática del idioma de entrada
-- Control de uso de tokens de OpenAI
-- Sistema de notificaciones por correo
-- Reportes de uso automáticos
+- Sistema de control de uso y notificaciones
+- Registro detallado de consultas
 
-## Tecnologías Utilizadas
-
+## Tecnologías
 - Python 3.10+
 - Flask
 - OpenAI API
 - HTML/CSS
-- Langdetect (para detección de idiomas)
-- SMTP (para notificaciones por correo)
+- Detección automática de idioma
+- Sistema de notificaciones SMTP
 
 ## Configuración
+1. Configura las variables de entorno en Replit:
+   - OPENAI_API_KEY
+   - EMAIL_USER
+   - EMAIL_PASSWORD
+2. Ejecuta el proyecto (puerto 8080)
 
-1. Asegúrate de tener una clave API de OpenAI
-2. Configura las variables de entorno en Replit:
-   - OPENAI_API_KEY: Tu clave de API de OpenAI
-   - EMAIL_USER: Tu correo Gmail
-   - EMAIL_PASSWORD: Tu contraseña de aplicación de Gmail
-3. El proyecto se ejecutará automáticamente en el puerto 8080
+## Sistema de Control
+- Monitoreo de uso de tokens
+- Notificaciones automáticas de límites
+- Reportes periódicos por correo
+- Registro completo de interacciones
 
-## Uso
+---
 
-1. Accede a la página principal
-2. Escribe tu pregunta en cualquier idioma soportado (ES/EN/FR/PT)
-3. El sistema detectará automáticamente el idioma
-4. Recibe una respuesta detallada y práctica en el mismo idioma
-5. Consulta el historial en log.txt
+# English
 
-## Control de Uso
+A virtual assistant specialized in pet care, with particular focus on chicken care and other common pets. Developed with Flask and OpenAI API.
 
-- Límite configurable de tokens de OpenAI
-- Notificaciones automáticas al alcanzar el límite
-- Reportes periódicos de uso por correo
-- Registro detallado de todas las consultas
+## Features
+- Intuitive and responsive web interface
+- AI-generated responses using GPT-3.5
+- Modern dark theme design
+- Multilingual support (Spanish, English, French, Portuguese)
+- Usage control and notification system
+- Detailed query logging
 
-## Estructura del Proyecto
+## Technologies
+- Python 3.10+
+- Flask
+- OpenAI API
+- HTML/CSS
+- Automatic language detection
+- SMTP notification system
 
+## Setup
+1. Configure environment variables in Replit:
+   - OPENAI_API_KEY
+   - EMAIL_USER
+   - EMAIL_PASSWORD
+2. Run the project (port 8080)
+
+## Control System
+- Token usage monitoring
+- Automatic limit notifications
+- Periodic email reports
+- Complete interaction logging
+
+## Project Structure
 ```
 ├── static/
 │   └── style.css
@@ -62,6 +83,5 @@ Un asistente virtual especializado en el cuidado de mascotas, con enfoque partic
 └── README.md
 ```
 
-## Licencia
-
-Este proyecto está bajo la Licencia MIT.
+## License
+MIT License
