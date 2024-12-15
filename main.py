@@ -48,8 +48,11 @@ def ask():
             {"role": "system", "content": get_system_prompt(detected_lang)},
             {"role": "user", "content": question}
         ],
-        max_tokens=500,
-        temperature=0.7
+        max_tokens=300,  # Reducido para optimizar costos
+        temperature=0.5,  # Reducido para respuestas más consistentes
+        presence_penalty=0.1,  # Ligera penalización para evitar repeticiones
+        frequency_penalty=0.1,  # Ligera penalización para variedad léxica
+        top_p=0.9  # Núcleo de muestreo para mantener respuestas relevantes
     )
 
     # Extraer la respuesta generada por OpenAI
