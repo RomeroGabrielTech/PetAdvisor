@@ -1,6 +1,8 @@
 import openai
 import os
-import yagmail
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from flask import Flask, render_template, request
 from langdetect import detect, LangDetectException
 from datetime import datetime
@@ -75,12 +77,19 @@ def ask():
     # Verificar límites y enviar notificaciones
     if total_tokens >= MAX_TOKENS:
         try:
-            yag = yagmail.SMTP(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
-            yag.send(
-                to=ADMIN_EMAIL,
-                subject="ADVERTENCIA: Límite de tokens alcanzado - Asistente de Mascotas",
-                contents=f"Se ha alcanzado el límite de tokens ({MAX_TOKENS}).\nUso total: {total_tokens}\nConsultas totales: {usage_count}"
-            )
+            msg = MIMEMultipart()
+            msg['From'] = os.getenv('EMAIL_USER')
+            msg['To'] = ADMIN_EMAIL
+            msg['Subject'] = "ADVERTENCIA: Límite de tokens alcanzado - Asistente de Mascotas"
+            
+            body = f"Se ha alcanzado el límite de tokens ({MAX_TOKENS}).\nUso total: {total_tokens}\nConsultas totales: {usage_count}"
+            msg.attach(MIMEText(body, 'plain'))
+            
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
+            server.send_message(msg)
+            server.quit()
             return render_template('response.html', 
                                 question=question,
                                 answer="Lo siento, se ha alcanzado el límite de uso. Contacta al administrador.")
@@ -90,12 +99,19 @@ def ask():
     # Enviar reporte diario
     if usage_count % 10 == 0:  # Cada 10 usos
         try:
-            yag = yagmail.SMTP(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
-            yag.send(
-                to=ADMIN_EMAIL,
-                subject="Gasto en App de Asistente de Mascotas",
-                contents=f"Reporte de uso:\nConsultas totales: {usage_count}\nTokens totales: {total_tokens}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
-            )
+            msg = MIMEMultipart()
+            msg['From'] = os.getenv('EMAIL_USER')
+            msg['To'] = ADMIN_EMAIL
+            msg['Subject'] = "Gasto en App de Asistente de Mascotas"
+            
+            body = f"Reporte de uso:\nConsultas totales: {usage_count}\nTokens totales: {total_tokens}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+            msg.attach(MIMEText(body, 'plain'))
+            
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
+            server.send_message(msg)
+            server.quit()
         except Exception as e:
             print(f"Error enviando reporte: {e}")
 
