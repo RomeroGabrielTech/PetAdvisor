@@ -1,0 +1,100 @@
+
+DOCUMENTACIÓN DEL ASISTENTE DE MASCOTAS
+======================================
+
+1. DESCRIPCIÓN GENERAL
+---------------------
+El Asistente de Mascotas es una aplicación web desarrollada con Flask y la API de OpenAI, especializada en proporcionar consejos sobre el cuidado de mascotas, con un enfoque particular en el cuidado de pollos.
+
+2. CARACTERÍSTICAS PRINCIPALES
+---------------------------
+- Interfaz web responsive
+- Soporte multilingüe (Español, Inglés, Francés, Portugués)
+- Sistema de detección automática de idioma
+- Historial de consultas
+- Sistema de monitoreo de uso
+- Notificaciones por correo electrónico
+- Diseño moderno con tema oscuro
+
+3. REQUISITOS TÉCNICOS
+--------------------
+- Python 3.10+
+- Flask
+- OpenAI API
+- Langdetect
+- SMTP para notificaciones
+
+4. CONFIGURACIÓN
+--------------
+Variables de entorno requeridas:
+- OPENAI_API_KEY: Clave de API de OpenAI
+- EMAIL_USER: Correo electrónico para notificaciones
+- EMAIL_PASSWORD: Contraseña del correo electrónico
+
+5. ESTRUCTURA DEL PROYECTO
+------------------------
+/
+├── static/
+│   └── style.css         # Estilos de la aplicación
+├── templates/
+│   ├── index.html        # Página principal
+│   └── response.html     # Página de respuesta
+├── main.py              # Archivo principal
+├── log.txt             # Registro de consultas
+└── documentation.txt   # Este archivo
+
+6. FUNCIONALIDADES DETALLADAS
+---------------------------
+6.1. Sistema de Preguntas y Respuestas
+- Límite de 500 caracteres por pregunta
+- Respuestas formateadas con HTML básico
+- Detección automática del idioma de la pregunta
+
+6.2. Sistema de Monitoreo
+- Seguimiento del uso de tokens
+- Límite configurable (DEFAULT: 1,000,000 tokens)
+- Notificaciones automáticas al alcanzar límites
+
+6.3. Sistema de Registro
+- Almacenamiento de todas las consultas en log.txt
+- Formato: Pregunta, Respuesta, Separador
+- Visualización de historial en la interfaz
+
+7. ENDPOINTS
+----------
+- GET /: Página principal
+- POST /ask: Procesar preguntas
+
+8. MANTENIMIENTO
+--------------
+8.1. Monitoreo
+- Revisar log.txt para análisis de uso
+- Verificar notificaciones de límites
+- Monitorear uso de tokens
+
+8.2. Respaldos Recomendados
+- Hacer respaldo regular de log.txt
+- Mantener copia de configuraciones
+
+9. CONTACTO Y SOPORTE
+-------------------
+Administrador: ing.gabriel.romero@gmail.com
+
+10. LIMITACIONES CONOCIDAS
+------------------------
+- Máximo 500 caracteres por pregunta
+- Límite configurable de tokens
+- Requiere conexión a Internet
+
+11. SEGURIDAD
+------------
+- No almacena información sensible de usuarios
+- Uso de variables de entorno para credenciales
+- Sanitización básica de entradas
+
+12. HISTORIAL DE VERSIONES
+------------------------
+Versión 0.1.0
+- Implementación inicial
+- Soporte multilingüe
+- Sistema de monitoreo básico
