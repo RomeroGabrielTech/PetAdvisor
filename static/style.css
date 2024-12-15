@@ -28,7 +28,7 @@ h1 {
 /* Texto */
 p {
     font-size: 18px;
-    margin-bottom: 15px;
+    margin: 0 20px 15px;
 }
 
 /* Formulario y campo de texto */
