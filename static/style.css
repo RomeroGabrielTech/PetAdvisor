@@ -123,3 +123,29 @@ a.volver:hover {
     background-color: #1E1E1E;
 }
 
+.history-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.history-section h2 {
+    color: #BB86FC;
+    margin-bottom: 20px;
+}
+
+.history-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #BB86FC;
+    border-radius: 5px;
+    background-color: #2D2D2D;
+}
+
+.history-item p {
+    margin: 10px 0;
+}
+

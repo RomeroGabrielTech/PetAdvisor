@@ -29,7 +29,20 @@ def get_system_prompt(lang):
 #-------------------------------
 @app.route('/')
 def home():
-    return render_template('index.html')
+    history = []
+    try:
+        with open("log.txt", "r", encoding="utf-8") as file:
+            content = file.read().split('-'*50)
+            for entry in content:
+                if entry.strip():
+                    parts = entry.strip().split('\n')
+                    if len(parts) >= 2:
+                        question = parts[0].replace('Pregunta: ', '')
+                        answer = parts[1].replace('Respuesta: ', '')
+                        history.append({'question': question, 'answer': answer})
+    except FileNotFoundError:
+        pass
+    return render_template('index.html', history=history[::-1])
 
 #-------------------------------
 @app.route('/ask', methods=['POST'])

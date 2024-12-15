@@ -14,5 +14,15 @@
         <input type="text" name="question" placeholder="Escribe tu pregunta aquí..." maxlength="500" required>
         <button type="submit">Enviar</button>
     </form>
+    
+    <div class="history-section">
+        <h2>Historial de Preguntas</h2>
+        {% for item in history %}
+        <div class="history-item">
+            <p><strong>Pregunta:</strong> {{ item.question }}</p>
+            <p><strong>Respuesta:</strong> {{ item.answer|safe }}</p>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
