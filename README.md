@@ -10,6 +10,8 @@ Un asistente virtual especializado en el cuidado de mascotas, con enfoque partic
 - Diseño moderno con tema oscuro
 - Registro de conversaciones
 - Validación de entrada de usuario
+- Soporte multilingüe (Español, Inglés, Francés y Portugués)
+- Detección automática del idioma de entrada
 
 ## Tecnologías Utilizadas
 
@@ -17,6 +19,7 @@ Un asistente virtual especializado en el cuidado de mascotas, con enfoque partic
 - Flask
 - OpenAI API
 - HTML/CSS
+- Langdetect (para detección de idiomas)
 
 ## Configuración
 
@@ -27,9 +30,10 @@ Un asistente virtual especializado en el cuidado de mascotas, con enfoque partic
 ## Uso
 
 1. Accede a la página principal
-2. Escribe tu pregunta sobre el cuidado de mascotas
-3. Recibe una respuesta detallada y práctica
-4. Consulta el historial en log.txt
+2. Escribe tu pregunta en cualquier idioma soportado (ES/EN/FR/PT)
+3. El sistema detectará automáticamente el idioma
+4. Recibe una respuesta detallada y práctica en el mismo idioma
+5. Consulta el historial en log.txt
 
 ## Estructura del Proyecto
 
