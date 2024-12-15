@@ -41,13 +41,14 @@ form {
 
 input[type="text"] {
     padding: 10px;
-    width: 100%;
+    width: calc(100% - 40px);
     background-color: #1E1E1E;
     color: #E0E0E0;
     border: 1px solid #BB86FC;
     border-radius: 5px;
     outline: none;
     font-size: 16px;
+    margin: 0 20px;
 }
 
 button {
