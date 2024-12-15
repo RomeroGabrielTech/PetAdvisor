@@ -1,7 +1,15 @@
 import openai
 import os
+import yagmail
 from flask import Flask, render_template, request
 from langdetect import detect, LangDetectException
+from datetime import datetime
+
+# Configuración de correo y seguimiento
+ADMIN_EMAIL = "ing.gabriel.romero@gmail.com"
+MAX_TOKENS = 1000000  # Ajusta este valor según tu límite
+usage_count = 0
+total_tokens = 0
 
 app = Flask(__name__)
 
@@ -57,6 +65,39 @@ def ask():
 
     # Extraer la respuesta generada por OpenAI
     answer = response.choices[0].message.content.strip()
+    
+    # Actualizar contadores
+    global usage_count, total_tokens
+    usage_count += 1
+    tokens_used = response.usage.total_tokens
+    total_tokens += tokens_used
+    
+    # Verificar límites y enviar notificaciones
+    if total_tokens >= MAX_TOKENS:
+        try:
+            yag = yagmail.SMTP(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
+            yag.send(
+                to=ADMIN_EMAIL,
+                subject="ADVERTENCIA: Límite de tokens alcanzado - Asistente de Mascotas",
+                contents=f"Se ha alcanzado el límite de tokens ({MAX_TOKENS}).\nUso total: {total_tokens}\nConsultas totales: {usage_count}"
+            )
+            return render_template('response.html', 
+                                question=question,
+                                answer="Lo siento, se ha alcanzado el límite de uso. Contacta al administrador.")
+        except Exception as e:
+            print(f"Error enviando email: {e}")
+    
+    # Enviar reporte diario
+    if usage_count % 10 == 0:  # Cada 10 usos
+        try:
+            yag = yagmail.SMTP(os.getenv('EMAIL_USER'), os.getenv('EMAIL_PASSWORD'))
+            yag.send(
+                to=ADMIN_EMAIL,
+                subject="Gasto en App de Asistente de Mascotas",
+                contents=f"Reporte de uso:\nConsultas totales: {usage_count}\nTokens totales: {total_tokens}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+            )
+        except Exception as e:
+            print(f"Error enviando reporte: {e}")
 
     # Guardar la pregunta y respuesta en un archivo
     with open("log.txt", "a", encoding="utf-8") as file:
