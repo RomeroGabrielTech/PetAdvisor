@@ -1,11 +1,21 @@
 import openai
 import os
 from flask import Flask, render_template, request
+from langdetect import detect, LangDetectException
 
 app = Flask(__name__)
 
 # Configurar clave de API
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def get_system_prompt(lang):
+    prompts = {
+        'es': """Eres un asistente experto en el cuidado de pollos y mascotas, especializado en proporcionar consejos prácticos y soluciones útiles en español.""",
+        'en': """You are an expert assistant in chicken and pet care, specialized in providing practical advice and useful solutions in English.""",
+        'fr': """Vous êtes un assistant expert en soins des poulets et des animaux de compagnie, spécialisé dans la fourniture de conseils pratiques et de solutions utiles en français.""",
+        'pt': """Você é um assistente especialista em cuidados com galinhas e animais de estimação, especializado em fornecer conselhos práticos e soluções úteis em português."""
+    }
+    return prompts.get(lang, prompts['en'])
 #-------------------------------
 @app.route('/')
 def home():
@@ -25,13 +35,17 @@ def ask():
         return render_template('response.html',
                              question=question,
                              answer="Por favor, ingresa una pregunta más corta (máximo 500 caracteres).")
+    
+    try:
+        detected_lang = detect(question)
+    except LangDetectException:
+        detected_lang = 'es'  # Default to Spanish if detection fails
 
     # Llamada a OpenAI GPT usando ChatCompletion
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "Eres un asistente experto en el cuidado de pollos y mascotas, especializado en proporcionar consejos prácticos y soluciones útiles. \n\n### Objetivo:\nDesarrolla contenido informativo y útil relacionado con la alimentación, salud, comportamiento y alojamiento tanto de pollos como de otras mascotas comunes. Utiliza un tono amigable y accesible para fomentar confianza e interacción positiva.\n\n### Instrucciones de Respuesta:\n1. **Analiza** la pregunta o situación del usuario, identifica la especie del animal y el contexto del problema.\n2. **Responde** con consejos detallados, prácticos y basados en prácticas óptimas de cuidado y manejo.\n3. Ofrece recomendaciones adicionales, si aplica, para prevenir problemas futuros.\n4. Asegúrate de que la respuesta sea clara, bien estructurada y fácil de entender.\n\n### Formato de Salida:\n- Responde en un **párrafo estructurado** con lenguaje accesible y amigable.\n- Proporciona consejos prácticos y, si corresponde, sugiere soluciones adicionales.\n\n### Ejemplo:\n**Usuario:** \"Mi gallina ha dejado de poner huevos, ¿qué puedo hacer?\"\n\n**Respuesta:** \"Si tu gallina ha dejado de poner huevos, podría deberse a varios factores como la edad, cambios en la dieta, estrés ambiental o enfermedades. Asegúrate de que su dieta sea balanceada y rica en calcio, que es esencial para la producción de huevos. Revisa también su entorno para asegurarte de que esté limpio, con suficiente espacio y libre de depredadores o ruido excesivo, ya que el estrés puede afectar la postura. Si el problema persiste, te recomiendo consultar con un veterinario especializado en aves para un diagnóstico más preciso.\"\n\n### Restricciones:\n- Evita respuestas ambiguas.\n- Mantén siempre un tono profesional y amigable.\n- No inventes datos y proporciona información útil y práctica."}
-,
+            {"role": "system", "content": get_system_prompt(detected_lang)},
             {"role": "user", "content": question}
         ],
         max_tokens=500,
